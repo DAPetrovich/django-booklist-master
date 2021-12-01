@@ -17,16 +17,10 @@ class Author(TimeStampMixin):
 
     lastname = models.CharField("Фамилия", max_length=50, null=False)
     firstname = models.CharField("Имя", max_length=50, null=False)
-    patronymic = models.CharField(
-        "Отчество", max_length=50, null=True, default=None, blank=True
-    )
+    patronymic = models.CharField("Отчество", max_length=50, null=True, default=None, blank=True)
     birth_date = models.DateField("Дата рождения", null=True, default=None, blank=True)
-    email = models.CharField(
-        "Email", max_length=50, null=True, default=None, blank=True
-    )
-    phone = models.CharField(
-        "Телефон", max_length=30, null=True, default=None, blank=True
-    )
+    email = models.CharField("Email", max_length=50, null=True, default=None, blank=True)
+    phone = models.CharField("Телефон", max_length=30, null=True, default=None, blank=True)
 
     def __str__(self):
         return f"{self.lastname} {self.firstname} {self.patronymic if self.patronymic else ''}".strip()
@@ -42,12 +36,8 @@ class PublishingHouse(TimeStampMixin):
 
     title = models.CharField("Наименование", max_length=50, null=False)
     address = models.CharField("Адрес", max_length=50, null=False)
-    email = models.CharField(
-        "Email", max_length=50, null=True, default=None, blank=True
-    )
-    phone = models.CharField(
-        "Телефон", max_length=30, null=True, default=None, blank=True
-    )
+    email = models.CharField("Email", max_length=50, null=True, default=None, blank=True )
+    phone = models.CharField("Телефон", max_length=30, null=True, default=None, blank=True)
 
     def __str__(self):
         return self.title
@@ -61,9 +51,7 @@ class PublishingHouse(TimeStampMixin):
 class Book(TimeStampMixin):
     """Книга"""
 
-    authors = models.ManyToManyField(
-        "Author", verbose_name="Авторы", related_name="author_books",
-    )
+    authors = models.ManyToManyField("Author", verbose_name="Авторы", related_name="author_books",)
     publishing_house = models.ForeignKey(
         "PublishingHouse",
         on_delete=models.PROTECT,
@@ -72,8 +60,7 @@ class Book(TimeStampMixin):
         blank=False,
         related_name="publishing_house_book",
     )
-    title = models.CharField(
-        "Название", max_length=255, null=False, blank=False, db_index=True
+    title = models.CharField("Название", max_length=255, null=False, blank=False, db_index=True
     )
     publishing_year = models.SmallIntegerField(
         "Год издания",

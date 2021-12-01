@@ -35,8 +35,13 @@ def books(request):
         )
 
     books_objects = Book.objects.prefetch_related("authors").filter(query)
+    print('--------1111111---------')
+    for el in books_objects:
+        print(el)
+
     authors_lookup = Author.objects.all()
     books_lookup = Book.objects.all()
+
 
     return render(
         request,
@@ -46,7 +51,7 @@ def books(request):
             "form": {
                 "description": "Здесь вы можете ознакомиться с каталогом меню",
                 "author": {
-                    "title": "Ингредиент",
+                    "title": "Автор",
                     "objects": authors_lookup,
                     "selected": book_author_id,
                 },
